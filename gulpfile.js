@@ -16,9 +16,15 @@ const cleanCSS = require('gulp-clean-css');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
+gulp.task('js', function () {
+  return gulp.src('blocks/*.js')
+  .pipe(gulp.dest('./public'))
+}
+  )
+
 
 gulp.task('views', function () {
-  return gulp.src('pages/**/*.pug')
+  return gulp.src('blocks/**/*.pug')
     .pipe(plumber({
       errorHandler: notify.onError(function (err) {
         return {
@@ -71,6 +77,7 @@ gulp.task('images', function () {
 gulp.task('watch', function () {
   gulp.watch('./{blocks,pages}/**/*.pug', gulp.series('views'));
   gulp.watch('./{blocks,pages}/**/*.styl', gulp.series('styles'));
+  gulp.watch('./blocks/*.js', gulp.series('js'))
 });
 
 gulp.task('serve', function () {
@@ -101,4 +108,3 @@ gulp.task('default', gulp.series(
     'watch',
     'serve'
 )));
-
