@@ -16,12 +16,12 @@ const cleanCSS = require('gulp-clean-css');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
+
+
 gulp.task('js', function () {
   return gulp.src('blocks/*.js')
-  .pipe(gulp.dest('./public'))
-}
-  )
-
+    .pipe(gulp.dest('./public'));
+});
 
 gulp.task('views', function () {
   return gulp.src('blocks/**/*.pug')
@@ -46,7 +46,7 @@ gulp.task('views', function () {
 });
 
 gulp.task('styles', function () {
-  return gulp.src('./pages/**/*.styl')
+  return gulp.src('./blocks/*.styl')
     .pipe(plumber({
       errorHandler: notify.onError(function (err) {
         return {
@@ -105,6 +105,7 @@ gulp.task('build', gulp.series(
 gulp.task('default', gulp.series(
   'build',
   gulp.parallel(
+    'js',
     'watch',
     'serve'
 )));
