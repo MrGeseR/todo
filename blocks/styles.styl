@@ -1,16 +1,45 @@
 .newToDo
-	max-width 33%
-	display inline-block
 	padding 10px 25px
 	float left
 	text-align center
 	border 1px solid black
-.toDoList 
+	background-color #333
+	color #ccc
+	
+.taskInput
+	border 1px solid #fff
+	margin 0 25px
+	border-radius 10px
+	text-align center
+	background-color #ccc
+	color #000
+	&:focus
+		border 1px solid #c70000
+		outline none
+
+.button 
+	border-radius 3px
+	padding 5px 25px
+	margin 25px
+	background-color #ccc
+	border 1px solid #fff
+	color black
+	&:hover
+		background-color #fff
+
+.toDoList
 	list-style-type none
 	padding-left 0px
 	text-align center
-.toDoItem
-	text-align left
-	max-width 100%
-	&__done
-		text-align right
+	&__item
+		text-align left
+		max-width 100%
+		position relative
+		&Select
+			margin-right 15px
+		&Remove
+			position absolute
+			right 0
+		&_done
+			text-decoration line-through
+		
