@@ -1,45 +1,61 @@
+body
+	margin 0
 .newToDo
 	padding 10px 25px
-	float left
 	text-align center
-	border 1px solid black
 	background-color #333
 	color #ccc
-	
-.taskInput
-	border 1px solid #fff
-	margin 0 25px
-	border-radius 10px
-	text-align center
-	background-color #ccc
-	color #000
-	&:focus
-		border 1px solid #c70000
-		outline none
-
-.button 
-	border-radius 3px
-	padding 5px 25px
-	margin 25px
-	background-color #ccc
-	border 1px solid #fff
-	color black
-	&:hover
-		background-color #fff
-
-.toDoList
-	list-style-type none
-	padding-left 0px
-	text-align center
-	&__item
-		text-align left
-		max-width 100%
-		position relative
-		&Select
-			margin-right 15px
-		&Remove
+	&__input
+		font-size 2rem
+		width 60%
+		height 40px
+		border 1px solid #fff
+		margin 0 25px
+		border-radius 40px
+		text-align center
+		background-color #ccc
+		color #000
+		&:focus
+			border 1px solid #c70000
+			outline none
+	&__list
+		list-style-type none
+		padding-left 0px
+		text-align center
+		&Item
+			margin 0 auto
+			text-align left
+			max-width 70%
+			position relative
+		&Button
 			position absolute
 			right 0
-		&_done
-			text-decoration line-through
-		
+			top -3px
+			max-width 5%
+		&Label
+			font-size 1.5rem
+			line-height 2
+
+
+.newToDo__listCheckbox
+	display none   
+
+.newToDo__listCheckbox + .newToDo__listLabel:before 
+	content '\2713'
+	position relative
+	top 5px
+	display inline-block
+	margin-right 15px
+	color green
+	font-size 40px
+	line-height 30px
+	-webkit-transform scale(0)
+	transform scale(0)
+	-webkit-transition 0.3s
+	transition 0.3s
+
+
+
+.newToDo__listCheckbox:checked + .newToDo__listLabel:before 
+	-webkit-transform scale(1)
+	transform scale(1)
