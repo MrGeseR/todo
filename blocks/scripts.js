@@ -27,7 +27,7 @@ var ToDoList = function() {
 	 	  		$(ulToDo).append(li);
 	 	  		let checkbox = ("<input type='checkbox' class='newToDo__listCheckbox' id='"+ToDo.count+"' onclick='replace(this)'>");
 	 	  		let label = ("<label for='"+ToDo.count+"' class='newToDo__listLabel'>"+toDo.name+"</label>");
-	 	  		let del = ("<img src='./images/Cross.png' class='newToDo__listButton'>");
+	 	  		let del = ("<img src='./images/Cross.png' class='newToDo__listButton' onclick='del(this)' >");
 	 	  		$(li).append(checkbox,label,del);
 	 	  		whatToDo.push(toDo);
 	 	  		input[0].value = '';
@@ -72,7 +72,23 @@ function replace(param){
 		whatToDo.push(whatDone[j]);
 		whatDone.splice(j,1);
 	}
+}
 
+function del(param){
+	$(param).parent().remove();
+	let text = $(param).parent().children()[1].innerText;
+	for (let i = whatDone.length - 1; i >= 0; i--) {
+		if (whatDone[i].name == text){
+			whatDone.splice(i,1);
+		}
+		continue;
+	}
+	for (let i = whatToDo.length - 1; i >= 0; i--) {
+		if (whatToDo[i].name == text){
+			whatToDo.splice(i,1);
+		}
+		continue;
+	}
 }
 
 
