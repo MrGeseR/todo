@@ -9,14 +9,23 @@ ToDo.count = 0;
 
 var whatToDo = [];
 var whatDone = [];
+var whatDoing = [];
 
 var ToDoList = function() {
 	var div = $('.newToDo')[0];
 	$(div).append("<h1 class='newToDo__heading'>What are you going to do?</h1>");
 	var input = $("<input type='text' class='newToDo__input' placeholder='Type here your promises, forgetful!'>");
-	var ulToDo = $("<ul class='newToDo__list' id='ulToDo'><h2 class='newToDo__listHeader'> List of things to do:</h2>");
-	var ulDone = $("<ul class='newToDo__list' id='ulDone'><h2 class='newToDo__listHeader'> List of done things:</h2>");
-	$(div).append(input, ulToDo, ulDone);
+	var headers = $("<div></div>");
+	$(div).append(input, headers);
+	var header1 = $("<h2 class='newToDo__listHeader col-md-6'> List of things to do:</h2>");
+	// var header2 = $("<h2 class='newToDo__listHeader col-md-4'> List of things that are in progress:</h2>");
+	var header3 = $("<h2 class='newToDo__listHeader col-md-6'> List of done things:</h2>");
+	$(headers).append(header1, header3);
+
+	var ulToDo = $("<ul class='newToDo__list col-md-6' id='ulToDo'>");
+	// var ulDoing = $("<ul class='newDoing__list col-md-4' id='ulDoing'>");
+	var ulDone = $("<ul class='newDone__list col-md-6' id='ulDone'>");
+	$(div).append(ulToDo,  ulDone);
 
 	$(input).keypress(function(e){
  	   	if(e.keyCode==13){
@@ -25,8 +34,8 @@ var ToDoList = function() {
 	 	  		var toDo = new ToDo(name);
 				let li = $("<li class='newToDo__listItem'>")
 	 	  		$(ulToDo).append(li);
-	 	  		let checkbox = ("<input type='checkbox' class='newToDo__listCheckbox' id='"+ToDo.count+"' onclick='replace(this)'>");
-	 	  		let label = ("<label for='"+ToDo.count+"' class='newToDo__listLabel'>"+toDo.name+"</label>");
+	 	  		let checkbox = ("<input type='checkbox' class='newToDo__listCheckbox' id='"+ToDo.count+"' onclick='changeUl(this)'>");
+	 	  		let label = ("<label for='"+ToDo.count+"' class='newToDo__listLabel '>"+toDo.name+"</label>");
 	 	  		let del = ("<img src='./images/Cross.png' class='newToDo__listButton' onclick='del(this)' >");
 	 	  		$(li).append(checkbox,label,del);
 	 	  		whatToDo.push(toDo);
@@ -42,10 +51,10 @@ var ToDoList = function() {
 
 var list = new ToDoList();
 
-function replace(param){
-	if ($(param).prop( "checked" )){
+function changeUl(param){
+	if ($(param).prop("checked")){
 		$('#ulDone').append($(param).parent());
-		$(param).parent().addClass('newToDo__listItem_done');
+		$(param).parent().attr('class', 'newDone__listItem');
 		let text = $(param).parent().children()[1].innerText;
 		let j;
 		for (var i = whatToDo.length - 1; i >= 0; i--) {
@@ -91,4 +100,21 @@ function del(param){
 	}
 }
 
-
+$(function() {
+	$('#ulToDo').sortable({
+		connectWith: '.newDone__list',
+		placeholder: 'emptySpace',
+		receive: function (event, ui) {
+			$(ui.item.children()[0]).prop('checked',false)
+			$(ui.item.children()[0]).trigger('onclick')
+    	}
+	});
+	$('#ulDone').sortable({
+		connectWith: '.newToDo__list',
+		placeholder: 'emptySpace',
+		receive: function (event, ui) {
+			$(ui.item.children()[0]).prop('checked',true)
+			$(ui.item.children()[0]).trigger('onclick')
+			    }
+  });
+});

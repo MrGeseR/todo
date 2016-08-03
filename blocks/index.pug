@@ -1,8 +1,12 @@
 doctype html
 html(lang="en")
-	title ToDo list
-	link(rel="stylesheet" href="./styles.css")
-	script(src='./jquery-3.1.0.min.js')
-	script(defer src='./scripts.js')
+	head
+		title ToDo list
+		link(rel="stylesheet" href="./styles.css")
+		link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+		link(href='https://fonts.googleapis.com/css?family=Marck+Script&subset=latin,cyrillic' rel='stylesheet' type='text/css')
+		script(src='./jquery-3.1.0.min.js')
+		script(src="https://code.jquery.com/ui/1.12.0-rc.2/jquery-ui.js"   integrity="sha256-6HSLgn6Ao3PKc5ci8rwZfb//5QUu3ge2/Sw9KfLuvr8="   crossorigin="anonymous")
+		script(defer src='./scripts.js')
 	body
-		.newToDo
+		.newToDo.row
